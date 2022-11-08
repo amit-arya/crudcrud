@@ -64,22 +64,22 @@
             function showNewUserOnScreen(user){
                 const parentNode = document.getElementById('listOfUsers');
                 const childHTML = `<li id=${user.email}> ${user.name} - ${user.email}
-                    <button onclick=editUserDetails('${user.email}','${user.name}','${user.phonenumber}')>Edit</button>
+                    <button onclick=editUserDetails('${user.email}','${user.name}','${user._id}')>Edit</button>
                                         <button onclick=deleteUser('${user._id}','${user.email}')> Delete</button>
                                      </li>`
 
                 parentNode.innerHTML = parentNode.innerHTML + childHTML;
             }
 
-            function editUserDetails(emailId, name, phonenumber){
-                document.getElementById('email').value = email;
+            function editUserDetails(emailId, name, id){
+                document.getElementById('email').value = emailId;
                 document.getElementById('name').value = name;
-                deleteUser(emailId)
+                deleteUser(id, emailId)
             }
             // deleteUser('abc@gmail.com')
 
             function deleteUser(id, email){
-                console.log(id)
+               // console.log(id)
                 //localStorage.removeItem(email);
                 let del = "https://crudcrud.com/api/feb96c30154e4834b95b16fcfe5a7de7/appointmentData/";
                 del += id;
