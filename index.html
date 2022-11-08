@@ -28,7 +28,7 @@
                 }
 
                 //localStorage.setItem(obj.email, JSON.stringify(obj))
-                axios.post("https://crudcrud.com/api/412cbe4c63e746509694fa97996a8852/appointmentData",obj)
+                axios.post("https://crudcrud.com/api/feb96c30154e4834b95b16fcfe5a7de7/appointmentData",obj)
                 .then((response)=>{
                     showNewUserOnScreen(response.data);
                 })
@@ -39,7 +39,7 @@
             }
 
             window.addEventListener("DOMContentLoaded", () => {
-                axios.get("https://crudcrud.com/api/412cbe4c63e746509694fa97996a8852/appointmentData")
+                axios.get("https://crudcrud.com/api/feb96c30154e4834b95b16fcfe5a7de7/appointmentData")
                 .then((response)=>{
 
                     for(let i=0;i<response.data.length;i++){
@@ -65,7 +65,7 @@
                 const parentNode = document.getElementById('listOfUsers');
                 const childHTML = `<li id=${user.email}> ${user.name} - ${user.email}
                     <button onclick=editUserDetails('${user.email}','${user.name}','${user.phonenumber}')>Edit</button>
-                                        <button onclick=deleteUser('${user.email}')> Delete</button>
+                                        <button onclick=deleteUser('${user._id}','${user.email}')> Delete</button>
                                      </li>`
 
                 parentNode.innerHTML = parentNode.innerHTML + childHTML;
@@ -78,9 +78,15 @@
             }
             // deleteUser('abc@gmail.com')
 
-            function deleteUser(email){
-                console.log(email)
-                localStorage.removeItem(email);
+            function deleteUser(id, email){
+                console.log(id)
+                //localStorage.removeItem(email);
+                let del = "https://crudcrud.com/api/feb96c30154e4834b95b16fcfe5a7de7/appointmentData/";
+                del += id;
+
+                axios.delete(del)
+                .then(()=> console.log("deleted"));
+
                 removeUserFromScreen(email);
 
             }
